@@ -1,0 +1,31 @@
+class Solution 
+{ 
+    static int Search(int array[], int target)
+	{
+	    int l=0;int h=array.length-1;
+	    while(l<=h){
+	        int mid=l+(h-l)/2;
+	       if(array[mid]==target)return mid;
+	       //check whether left side is sorted
+	       if(array[l]<array[mid]){
+	           //check whther k is in boundary 
+	           if(array[l]<=target && target<array[mid]){
+	               h=mid-1;
+	           }else{
+	               l=mid+1;
+	           }
+	       }//right side is sorted
+	       else{//check for boundaries of k leying in
+	          if(array[mid]<target && target<=array[h]){
+	              l=mid+1;
+	          }else{
+	              h=mid-1;
+	          } 
+	       }
+	    }
+	    return -1;
+	}
+} 
+//LEFT OR RIGHT ANY ONE WILL ALWAYS BE SORTED 
+//IN SORTED PART CHECK WHETHER OUR TARGET LIES IN THAT RANGE
+//AND REDUCE THE SEARCH SPACE ACCORDINGLY
