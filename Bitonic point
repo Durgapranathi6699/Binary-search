@@ -1,0 +1,20 @@
+class Solution {
+    int findMaximum(int[] arr, int n) {
+    //if our array is increasing then our space shits right else left
+    int l=0;
+    int h=n-1;
+    while(l<=h){
+        int mid=l+(h-l)/2;
+        if((mid==0 || arr[mid]>arr[mid-1]) && (mid==n-1 ||arr[mid]>arr[mid+1]))
+        return arr[mid];
+        //increasing side of array so space moves to right
+        if(arr[mid]<arr[mid+1])l=mid+1;
+        else h=mid-1;
+    }
+    return -1;
+    }
+}
+
+/\
+/ on this side(on increasing side) our bitonic is at right side
+\ on this decresing side bitonic is before it which is on left side
