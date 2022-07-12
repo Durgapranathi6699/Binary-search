@@ -1,7 +1,8 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
         int ans[]=new int[2];
-        ans[0]=helper(nums,target,true);//to find starting index
+        ans[0]=helper(nums,target,true);//to find starting index  
+        /for 1 st which wiil on extreme left
         ans[1]=helper(nums,target,false);//to find ending index
         return ans;
     }
@@ -18,6 +19,7 @@ class Solution {
                  ans=mid;
                 if(first){
                     //will be on extreme left
+                    //1 st occurence of element will be on extreme left
                     end=mid-1;
                 }else{
                     start=mid+1;
