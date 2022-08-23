@@ -1,0 +1,35 @@
+class Solution {
+    public int maxDistance(int[] position, int m) {
+    // maximization of min value
+        Arrays.sort(position);
+        int start=1;
+        int n=position.length;
+        int end=position[n-1]-position[0];
+        int ans=1;
+        while(start<=end){
+            int mid=(start)+(end-start)/2;
+            if(distancePosiible(position,m,mid)){
+                //here mid is the one possible distance where u can place balls 
+                ans=mid;
+                start=mid+1;//for better answer
+            }else{
+                end=mid-1;
+            }
+        }
+        return ans;
+    }
+    boolean distancePosiible(int[] position, int m,int dis){
+        int noofballs=1;
+        //1 st ball placed at index 0 
+        int curpos=position[0];
+        //check whether u can place remaining balls 
+        for(int i=1;i<position.length && noofballs<m ;i++){//m is total no.of balls to be used
+            if(position[i]>=curpos+dis){//which means u can place a ball at that position
+                noofballs++;
+                curpos=position[i];
+            }
+        }
+        if(noofballs<m)return false;
+        return true;
+    }
+}
