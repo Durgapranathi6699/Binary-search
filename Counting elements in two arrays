@@ -1,0 +1,33 @@
+class Solution
+{
+  public static ArrayList<Integer> countEleLessThanOrEqual(int arr1[], int arr2[], int m, int n)
+    {
+       ArrayList<Integer> l=new ArrayList<Integer>();
+    //     Map<Integer,Integer> map=new HashMap<>();
+    //     for(int i=0;i<n;i++){
+    //         if(map.containsKey(arr2[i])){
+    //             map.put(arr2[i],map.get(arr2[i])+1);
+    //         }else map.put(arr2[i],1);
+    //      }
+    //     int ans=0;
+    //     for(int i=0;i<m;i++){
+    //          for(Map.Entry<Integer,Integer> e:map.entrySet()){
+    //              if(e.getKey()<=arr1[i]){
+    //              ans=ans+e.getValue();
+    //           } }
+    //       l.add(ans);
+    //       ans=0;}}
+        Arrays.sort(arr2);
+        for(int i=0;i<m;i++){
+            int target=arr1[i];
+            int start=0;int end=arr2.length-1;
+            while(start<=end){
+                int mid=(start)+(end-start)/2;
+                if(arr2[mid]>target) end=mid-1;
+                else start=mid+1; 
+                  }
+             l.add(end+1);
+          }
+        return l;
+    }
+}
