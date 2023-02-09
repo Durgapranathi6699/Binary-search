@@ -1,26 +1,24 @@
 class Solution {
-    public int findMin(int[] arr) {
-       //sorted rotated 
-      //case 1  //if  mid-1 is greater than mid this our point of roation so return value of mid
-        //if not above case our answer will be in unsorted part
-        //if left unsorted our answer lies here similary with right
-        //if both sorted which is our edge case which indicates array is not rotated return arr[l]
-    
-        int l=0;
-        int h=arr.length-1;
-        while(l<=h){
-            int mid=l+(h-l)/2;
-            if( mid==0 || arr[mid-1]>arr[mid]){//case 1
-                if(mid==0 && (mid!=arr.length-1  && arr[mid+1]<arr[mid])){return arr[mid+1];}//edge case of length 2
-             return  arr[mid];   
-            } 
-            //if left is not sorted our ans lies here adjust the search space
-            if(arr[l]>arr[mid]) h=mid-1;
-            //if right is not sorted
-            else if(arr[mid]> arr[h])l=mid+1;
-            //if both sorted our edge case
-            else return arr[l];
-             }
-        return -1;
+    public int findMin(int[] nums) {
+       int start=0;
+       int end=nums.length-1;
+       while(start<end){
+           int mid=start+(end-start)/2;
+           //ex:3,4,5,1,2
+           //ans=1 beacuse mid<mid-1
+           if(mid>0 && nums[mid]<nums[mid-1]){
+               return nums[mid];
+           }
+           //ex:3,4,5,1,2
+           //let mid=1 
+           //if our mid is greater than start and end 
+           //so our ans will not lie in 1 st half
+           if(nums[start]<=nums[mid] && nums[mid]>nums[end]){
+               start=mid+1;
+           }else{
+               end=mid-1;
+           }
+       }
+       return nums[start];
     }
 }
