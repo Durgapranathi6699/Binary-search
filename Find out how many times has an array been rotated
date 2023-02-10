@@ -1,0 +1,26 @@
+class Solution {
+    int findKRotation(int arr[], int n) {
+        //method 1: no.of rotation == index of mininmum element 
+        // array is not rotated
+        int start=0;
+        int end=n-1;
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            if(arr[start]<=arr[end]){
+                return start;//not rotated
+            }
+            int prev=(mid-1+n)%n;
+            int next=(mid+1)%n;
+            //pivot element which is minimum
+            if(arr[mid]<=arr[prev] && arr[mid]<=arr[next]){
+                return mid;
+            }
+            if(arr[mid]<=arr[end]){
+                end=mid-1;
+            }else{
+                start=mid+1;
+            }
+        }
+        return -1;
+    }
+}
