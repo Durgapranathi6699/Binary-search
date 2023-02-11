@@ -1,0 +1,23 @@
+//initally pointer points to 1 st row last column
+//as values are stored in incresing way
+//check target is less or greater 
+//if greater incresing row
+//else decrease column
+
+
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int i=0;//strat of row
+        int j=matrix[0].length-1;//end of a row
+        while(j>=0 && i<matrix.length){
+            if(matrix[i][j]==target)return true;
+            if(matrix[i][j]<target){
+                i++;
+            }else{
+                j--;
+            }
+        }
+        
+        return false;
+    }
+}
