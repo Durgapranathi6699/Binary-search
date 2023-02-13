@@ -1,0 +1,37 @@
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
+        //sum for all i (speed / piles[i] ) < h
+        //ex speed=1
+        //time = 3/1+6/1+7/1 + 11/1 > h (so not possible answer)
+        //ex if speed ==3
+
+        //time= 3/3 + 6/3 + 7/3 + 11/3 this way find minimum speed posible
+        //speed ranges from 1 till max of piles
+        //as input is sorted 
+         int a=0;
+        int start=1;
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<piles.length;i++){
+            max=Math.max(max,piles[i]);
+        }
+        int end=max;
+       
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            int ans=0;
+        for(int i=0;i<piles.length;i++){
+            ans+=Math.ceil((double)piles[i] / mid);
+        }
+          if(ans<=h){
+              a=mid;
+              end=mid-1;
+            }else{
+                start=mid+1;
+               
+            }
+        }
+        return a;
+    }
+    
+    
+}
