@@ -1,0 +1,37 @@
+class Solution {
+    public int singleNonDuplicate(int[] nums) {
+        if(nums.length==1 )return nums[0];
+        int ans=0;
+        int start=0;
+       int end=nums.length-1;
+    while(start<=end){
+        int mid=start+(end-start)/2;
+
+        //if 1 st element itself is an single element
+
+        if(mid==0 && nums[mid]!=nums[mid+1]){
+            return nums[0];
+        }
+        //if last element is an single element
+
+        if(mid==nums.length-1 && nums[mid]!=nums[mid-1]){
+            return nums[mid];
+        }
+        //for a single element
+
+        if(nums[mid]!=nums[mid+1] && nums[mid]!=nums[mid-1]){
+            return nums[mid];
+        }
+        // answer lies in left half if
+        // index is even and mid-1 is same as mid    OR 
+        //index is odd and mid+1 is same as mid 
+
+        if((mid%2==0 && nums[mid]==nums[mid-1]) || (mid%2==1 && nums[mid]==nums[mid+1])){
+            end=mid-1;
+        }else{
+            start=mid+1;
+        }
+    }
+    return nums[start];  
+    }
+}
