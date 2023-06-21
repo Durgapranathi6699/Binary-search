@@ -1,0 +1,36 @@
+class Solution {
+        long min=Integer.MAX_VALUE;
+        long max=Integer.MIN_VALUE;
+    public long minCost(int[] nums, int[] cost) {
+        for(int i=0;i<nums.length;i++){
+            min=Math.min(min,nums[i]);
+            max=Math.max(max,nums[i]);
+        }
+        long start=min;
+        long end=max;
+         long ans=0;
+        while(start<=end){
+            long mid=start+(end-start)/2;
+            long midcost=cost(nums,cost,mid);
+            long midp1cost=cost(nums,cost,mid+1);
+            ans=Math.min(midcost,midp1cost);
+            
+            if(midp1cost>midcost)  end=mid-1;
+            else  start=mid+1;
+        }
+        return ans;
+    }
+    long cost(int[] nums, int[] cost,long val){
+        long sum=0;
+        for(int i=0;i<nums.length;i++){
+            sum=sum+(Math.abs(val-nums[i]))*cost[i];
+        }
+        return sum;
+    }
+}
+//BRUTE FORCE:O(N^2)
+//TAKING EACH VALUE AND TRYING THE TOTAL COST TO MAKE ALL ELEMNTS EQUAL
+//OPTIMIZED-USING BINARY SEARCH-O(NLOGN)
+//TAKING THE EXTREME LEFT OR RIGHT GIVES HIGHER COST
+//SO TRY TAKING THE MID VALUE
+//FOR SHIFTING THE SEARCH SPACE -- IF COST OF MID+1 > MID SHIFT SEARCH SPACE TO LEFT 
